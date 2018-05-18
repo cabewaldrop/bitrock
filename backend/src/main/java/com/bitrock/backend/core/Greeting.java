@@ -1,4 +1,4 @@
-package com.bitrock.core;
+package com.bitrock.backend.core;
 
 /**
  * Created by Cabe on 5/18/18.

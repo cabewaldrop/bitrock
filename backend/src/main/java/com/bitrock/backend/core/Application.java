@@ -1,4 +1,4 @@
-package com.bitrock.core;
+package com.bitrock.backend.core;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
