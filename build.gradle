@@ -1,0 +1,75 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+configurations {
+    compile.exclude module: 'spring-boot-starter-tomcat'
+    compile.exclude group: 'org.mortbay.jetty', module: 'javax.servlet'
+    comiple.exclude group: 'javax.servlet', module: 'servlet-api'
+    compile.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    compile.exclude group: 'org.slf4j', module: 'slf4j-simple'
+    compile.exclude group: 'io.swagger', module: 'swagger-servlet'
+    all {
+        resolutionStrategy {
+            dependencySubstitution {
+                substitute module('redis.clients:jedis') with module('redis.clients:jedis:2.6.1')
+
+            }
+        }
+    }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    ext.prometheusVersion = '0.0.25'
+    compile "io.prometheus:simpleclient_common:$prometheusVersion"
+    compile "io.prometheus:simpleclient_hotspot:$prometheusVersion"
+    compile "io.prometheus:simpleclient_servlet:$prometheusVersion"
+    compile "io.prometheus:simpleclient_spring_boot:$prometheusVersion"
+    compile "io.prometheus:simpleclient_spring_web:$prometheusVersion"
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.cloud:spring-cloud-stream-test-support'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+    }
+}
+
+
