@@ -1,4 +1,4 @@
-# bitrock
+# bitrock [![Build Status](https://travis-ci.com/cabewaldrop/bitrock.svg?branch=master)](https://travis-ci.com/cabewaldrop/bitrock)
 
 Prerequisite installs:
 
