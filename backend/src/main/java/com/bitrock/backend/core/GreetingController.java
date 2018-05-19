@@ -1,4 +1,4 @@
-package com.bitrock.core;
+package com.bitrock.backend.core;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
